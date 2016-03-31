@@ -17,9 +17,12 @@ PATTERN = re.compile(r'(\d+)\s*(%s)\b' % _UNITS, re.I | re.S | re.U)
 
 class FreshnessDateDataParser(object):
     """ Parses date string like "1 year, 2 months ago" and "3 hours, 50 minutes ago" """
+    past_now = None
 
     @property
     def now(self):
+        if self.past_now:
+            return self.past_now
         return datetime.utcnow()
 
     def _are_all_words_units(self, date_string):
@@ -92,6 +95,10 @@ class FreshnessDateDataParser(object):
         return kwargs
 
     def get_date_data(self, date_string, settings=None):
+        if hasattr(settings, 'rollback_to'):
+            day = map(int, settings.rollback_to.split('-')[:3])
+            self.past_now = datetime(*day)
+
         date, period = self.parse(date_string, settings)
         return dict(date_obj=date, period=period)
 
