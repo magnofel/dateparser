@@ -1,5 +1,5 @@
 settings:
-    PREFER_DATES_FROM: 'future'
+    PREFER_DATES_FROM: 'future_period'
     SUPPORT_BEFORE_COMMON_ERA: False
     PREFER_DAY_OF_MONTH: 'current'
     SKIP_TOKENS: ["t"]

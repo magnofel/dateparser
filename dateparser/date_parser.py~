@@ -26,7 +26,7 @@ class new_parser(parser.parser):
     """
 
     def parse(self, timestr, default=None, ignoretz=False, settings=None, **kwargs):
-	
+	print "debug"
         # timestr needs to be a buffer as required by _parse
         if isinstance(timestr, binary_type):
             timestr = timestr.decode()
